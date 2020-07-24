@@ -17,11 +17,11 @@ public class ScheduledServiceImpl implements ScheduledService{
     /**
      * 每一分钟执行一次  1000 * 60 * 1
      */
-    @Scheduled(fixedRate=1000 * 5 * 1)
+    @Scheduled(fixedRate=1000 * 6 * 1)
     @Override
     public void execute() {
         logger.info("数据上传到CRM数据库");
-        System.out.println("测试一下5秒定时任务");
+        System.out.println("测试一下6秒定时任务");
         dataUploadService.upload();
     }
 }
