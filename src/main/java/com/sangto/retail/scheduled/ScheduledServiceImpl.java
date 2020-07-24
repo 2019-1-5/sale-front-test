@@ -24,4 +24,14 @@ public class ScheduledServiceImpl implements ScheduledService{
         System.out.println("测试一下6秒定时任务");
         dataUploadService.upload();
     }
+
+    /**
+     * 每一分钟执行一次  1000 * 60 * 1
+     */
+    @Scheduled(fixedRate=1000 * 17 * 1)
+    public void a() {
+        logger.info("222222222222222");
+        System.out.println("测试一下6秒定时任务");
+        dataUploadService.upload();
+    }
 }
