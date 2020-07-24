@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sangto.retail.app.dao.RetailGoodPriceChgDetailDao">
+
+    <resultMap type="com.sangto.retail.app.domain.RetailGoodPriceChgDetail" id="RetailGoodPriceChgDetailMap">
+        <result property="chgno" column="chgno"/>
+        <result property="seq" column="seq"/>
+        <result property="gdno" column="gdno"/>
+        <result property="sellingPrice" column="selling_price"/>
+        <result property="vipPrice" column="vip_price"/>
+        <result property="vipDiscount" column="vip_discount"/>
+        <result property="vipDisThan" column="vip_dis_than"/>
+        <result property="usualDiscount" column="usual_discount"/>
+        <result property="disThan" column="dis_than"/>
+        <result property="vipCoefficient" column="vip_coefficient"/>
+        <result property="vipThan" column="vip_than"/>
+        <result property="beginDate" column="begin_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="stat" column="stat"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="RetailGoodPriceChgDetailMap">
+        select
+          chgno, seq, gdno, selling_price, vip_price, vip_discount, vip_dis_than, usual_discount, dis_than, vip_coefficient, vip_than, begin_date, end_date, stat
+        from retail_good_price_chg_detail
+        where 
+            chgno = #{chgno}  AND
+            seq = #{seq} 
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="RetailGoodPriceChgDetailMap">
+        select
+          chgno, seq, gdno, selling_price, vip_price, vip_discount, vip_dis_than, usual_discount, dis_than, vip_coefficient, vip_than, begin_date, end_date, stat
+        from retail_good_price_chg_detail
+        limit #{startPosition}, #{maxResult}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="RetailGoodPriceChgDetailMap">
+        select
+        chgno, seq, gdno, selling_price, vip_price, vip_discount, vip_dis_than, usual_discount, dis_than,
+        vip_coefficient, vip_than, begin_date, end_date, stat
+        from retail_good_price_chg_detail
+        <where>
+            <if test="chgno != null and chgno != ''">
+                and chgno = #{chgno}
+            </if>
+            <if test="seq != null">
+                and seq = #{seq}
+            </if>
+            <if test="gdno != null and gdno != ''">
+                and gdno = #{gdno}
+            </if>
+            <if test="sellingPrice != null">
+                and selling_price = #{sellingPrice}
+            </if>
+            <if test="vipPrice != null">
+                and vip_price = #{vipPrice}
+            </if>
+            <if test="vipDiscount != null">
+                and vip_discount = #{vipDiscount}
+            </if>
+            <if test="vipDisThan != null">
+                and vip_dis_than = #{vipDisThan}
+            </if>
+            <if test="usualDiscount != null">
+                and usual_discount = #{usualDiscount}
+            </if>
+            <if test="disThan != null">
+                and dis_than = #{disThan}
+            </if>
+            <if test="vipCoefficient != null">
+                and vip_coefficient = #{vipCoefficient}
+            </if>
+            <if test="vipThan != null">
+                and vip_than = #{vipThan}
+            </if>
+            <if test="beginDate != null and beginDate != ''">
+                and begin_date = #{beginDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and end_date = #{endDate}
+            </if>
+            <if test="stat != null and stat != ''">
+                and stat = #{stat}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into retail_good_price_chg_detail(gdno, selling_price, vip_price, vip_discount, vip_dis_than, usual_discount, dis_than, vip_coefficient, vip_than, begin_date, end_date, stat)
+        values (#{gdno}, #{sellingPrice}, #{vipPrice}, #{vipDiscount}, #{vipDisThan}, #{usualDiscount}, #{disThan}, #{vipCoefficient}, #{vipThan}, #{beginDate}, #{endDate}, #{stat})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update retail_good_price_chg_detail
+        <set>
+            <if test="gdno != null and gdno != ''">
+                gdno = #{gdno},
+            </if>
+            <if test="sellingPrice != null">
+                selling_price = #{sellingPrice},
+            </if>
+            <if test="vipPrice != null">
+                vip_price = #{vipPrice},
+            </if>
+            <if test="vipDiscount != null">
+                vip_discount = #{vipDiscount},
+            </if>
+            <if test="vipDisThan != null">
+                vip_dis_than = #{vipDisThan},
+            </if>
+            <if test="usualDiscount != null">
+                usual_discount = #{usualDiscount},
+            </if>
+            <if test="disThan != null">
+                dis_than = #{disThan},
+            </if>
+            <if test="vipCoefficient != null">
+                vip_coefficient = #{vipCoefficient},
+            </if>
+            <if test="vipThan != null">
+                vip_than = #{vipThan},
+            </if>
+            <if test="beginDate != null and beginDate != ''">
+                begin_date = #{beginDate},
+            </if>
+            <if test="endDate != null and endDate != ''">
+                end_date = #{endDate},
+            </if>
+            <if test="stat != null and stat != ''">
+                stat = #{stat},
+            </if>
+        </set>
+        where
+        chgno = #{chgno} AND
+        seq = #{seq}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from retail_good_price_chg_detail
+        where 
+            chgno = #{chgno}  AND
+            seq = #{seq} 
+    </delete>
+</mapper>

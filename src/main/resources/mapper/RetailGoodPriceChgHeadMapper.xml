@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sangto.retail.app.dao.RetailGoodPriceChgHeadDao">
+
+    <resultMap type="com.sangto.retail.app.domain.RetailGoodPriceChgHead" id="RetailGoodPriceChgHeadMap">
+        <result property="chgno" column="chgno"/>
+        <result property="storeId" column="store_id"/>
+        <result property="setType" column="set_type"/>
+        <result property="saleadjCause" column="saleadj_cause"/>
+        <result property="beginDate" column="begin_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="proposer" column="proposer"/>
+        <result property="creopr" column="creopr"/>
+        <result property="credate" column="credate"/>
+        <result property="modopr" column="modopr"/>
+        <result property="moddate" column="moddate"/>
+        <result property="chkopr" column="chkopr"/>
+        <result property="chkdate" column="chkdate"/>
+        <result property="stat" column="stat"/>
+        <result property="notes" column="notes"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="RetailGoodPriceChgHeadMap">
+        select
+          chgno, store_id, set_type, saleadj_cause, begin_date, end_date, proposer, creopr, credate, modopr, moddate, chkopr, chkdate, stat, notes
+        from retail_good_price_chg_head
+        where 
+            chgno = #{chgno} 
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="RetailGoodPriceChgHeadMap">
+        select
+          chgno, store_id, set_type, saleadj_cause, begin_date, end_date, proposer, creopr, credate, modopr, moddate, chkopr, chkdate, stat, notes
+        from retail_good_price_chg_head
+        limit #{startPosition}, #{maxResult}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="RetailGoodPriceChgHeadMap">
+        select
+        chgno, store_id, set_type, saleadj_cause, begin_date, end_date, proposer, creopr, credate, modopr, moddate,
+        chkopr, chkdate, stat, notes
+        from retail_good_price_chg_head
+        <where>
+            <if test="chgno != null and chgno != ''">
+                and chgno = #{chgno}
+            </if>
+            <if test="storeId != null and storeId != ''">
+                and store_id = #{storeId}
+            </if>
+            <if test="setType != null and setType != ''">
+                and set_type = #{setType}
+            </if>
+            <if test="saleadjCause != null and saleadjCause != ''">
+                and saleadj_cause = #{saleadjCause}
+            </if>
+            <if test="beginDate != null and beginDate != ''">
+                and begin_date = #{beginDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                and end_date = #{endDate}
+            </if>
+            <if test="proposer != null and proposer != ''">
+                and proposer = #{proposer}
+            </if>
+            <if test="creopr != null and creopr != ''">
+                and creopr = #{creopr}
+            </if>
+            <if test="credate != null and credate != ''">
+                and credate = #{credate}
+            </if>
+            <if test="modopr != null and modopr != ''">
+                and modopr = #{modopr}
+            </if>
+            <if test="moddate != null and moddate != ''">
+                and moddate = #{moddate}
+            </if>
+            <if test="chkopr != null and chkopr != ''">
+                and chkopr = #{chkopr}
+            </if>
+            <if test="chkdate != null and chkdate != ''">
+                and chkdate = #{chkdate}
+            </if>
+            <if test="stat != null and stat != ''">
+                and stat = #{stat}
+            </if>
+            <if test="notes != null and notes != ''">
+                and notes = #{notes}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into retail_good_price_chg_head(store_id, set_type, saleadj_cause, begin_date, end_date, proposer, creopr, credate, modopr, moddate, chkopr, chkdate, stat, notes)
+        values (#{storeId}, #{setType}, #{saleadjCause}, #{beginDate}, #{endDate}, #{proposer}, #{creopr}, #{credate}, #{modopr}, #{moddate}, #{chkopr}, #{chkdate}, #{stat}, #{notes})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update retail_good_price_chg_head
+        <set>
+            <if test="storeId != null and storeId != ''">
+                store_id = #{storeId},
+            </if>
+            <if test="setType != null and setType != ''">
+                set_type = #{setType},
+            </if>
+            <if test="saleadjCause != null and saleadjCause != ''">
+                saleadj_cause = #{saleadjCause},
+            </if>
+            <if test="beginDate != null and beginDate != ''">
+                begin_date = #{beginDate},
+            </if>
+            <if test="endDate != null and endDate != ''">
+                end_date = #{endDate},
+            </if>
+            <if test="proposer != null and proposer != ''">
+                proposer = #{proposer},
+            </if>
+            <if test="creopr != null and creopr != ''">
+                creopr = #{creopr},
+            </if>
+            <if test="credate != null and credate != ''">
+                credate = #{credate},
+            </if>
+            <if test="modopr != null and modopr != ''">
+                modopr = #{modopr},
+            </if>
+            <if test="moddate != null and moddate != ''">
+                moddate = #{moddate},
+            </if>
+            <if test="chkopr != null and chkopr != ''">
+                chkopr = #{chkopr},
+            </if>
+            <if test="chkdate != null and chkdate != ''">
+                chkdate = #{chkdate},
+            </if>
+            <if test="stat != null and stat != ''">
+                stat = #{stat},
+            </if>
+            <if test="notes != null and notes != ''">
+                notes = #{notes},
+            </if>
+        </set>
+        where
+        chgno = #{chgno}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from retail_good_price_chg_head
+        where 
+            chgno = #{chgno} 
+    </delete>
+</mapper>

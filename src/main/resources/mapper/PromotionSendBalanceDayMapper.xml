@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sangto.retail.app.dao.PromotionSendBalanceDayDao">
+
+    <resultMap type="com.sangto.retail.app.domain.PromotionSendBalanceDay" id="PromotionSendBalanceDayMap">
+        <result property="storeId" column="store_id"/>
+        <result property="tradeDate" column="trade_date_"/>
+        <result property="account" column="account"/>
+        <result property="batchno" column="batchno"/>
+        <result property="standardNo" column="standard_no"/>
+        <result property="consum" column="consum"/>
+        <result property="present" column="present"/>
+        <result property="consMnySum" column="cons_mny_sum"/>
+        <result property="sendAmtSum" column="send_amt_sum"/>
+        <result property="notGivingAmt" column="not_giving_amt"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PromotionSendBalanceDayMap">
+        select
+          store_id, trade_date_, account, batchno, standard_no, consum, present, cons_mny_sum, send_amt_sum, not_giving_amt
+        from promotion_send_balance_day
+        where 
+            store_id = #{storeId}  AND
+            trade_date_ = #{tradeDate}  AND
+            account = #{account}  AND
+            batchno = #{batchno}  AND
+            standard_no = #{standardNo} 
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="PromotionSendBalanceDayMap">
+        select
+          store_id, trade_date_, account, batchno, standard_no, consum, present, cons_mny_sum, send_amt_sum, not_giving_amt
+        from promotion_send_balance_day
+        limit #{startPosition}, #{maxResult}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="PromotionSendBalanceDayMap">
+        select
+        store_id, trade_date_, account, batchno, standard_no, consum, present, cons_mny_sum, send_amt_sum,
+        not_giving_amt
+        from promotion_send_balance_day
+        <where>
+            <if test="storeId != null and storeId != ''">
+                and store_id = #{storeId}
+            </if>
+            <if test="tradeDate != null and tradeDate != ''">
+                and trade_date_ = #{tradeDate}
+            </if>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
+            <if test="batchno != null and batchno != ''">
+                and batchno = #{batchno}
+            </if>
+            <if test="standardNo != null and standardNo != ''">
+                and standard_no = #{standardNo}
+            </if>
+            <if test="consum != null">
+                and consum = #{consum}
+            </if>
+            <if test="present != null">
+                and present = #{present}
+            </if>
+            <if test="consMnySum != null">
+                and cons_mny_sum = #{consMnySum}
+            </if>
+            <if test="sendAmtSum != null">
+                and send_amt_sum = #{sendAmtSum}
+            </if>
+            <if test="notGivingAmt != null">
+                and not_giving_amt = #{notGivingAmt}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into promotion_send_balance_day(consum, present, cons_mny_sum, send_amt_sum, not_giving_amt)
+        values (#{consum}, #{present}, #{consMnySum}, #{sendAmtSum}, #{notGivingAmt})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update promotion_send_balance_day
+        <set>
+            <if test="consum != null">
+                consum = #{consum},
+            </if>
+            <if test="present != null">
+                present = #{present},
+            </if>
+            <if test="consMnySum != null">
+                cons_mny_sum = #{consMnySum},
+            </if>
+            <if test="sendAmtSum != null">
+                send_amt_sum = #{sendAmtSum},
+            </if>
+            <if test="notGivingAmt != null">
+                not_giving_amt = #{notGivingAmt},
+            </if>
+        </set>
+        where
+        store_id = #{storeId} AND
+        trade_date_ = #{tradeDate} AND
+        account = #{account} AND
+        batchno = #{batchno} AND
+        standard_no = #{standardNo}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from promotion_send_balance_day
+        where 
+            store_id = #{storeId}  AND
+            trade_date_ = #{tradeDate}  AND
+            account = #{account}  AND
+            batchno = #{batchno}  AND
+            standard_no = #{standardNo} 
+    </delete>
+</mapper>

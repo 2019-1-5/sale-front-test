@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sangto.retail.app.dao.PromotionStandardDao">
+
+    <resultMap type="com.sangto.retail.app.domain.PromotionStandard" id="PromotionStandardMap">
+        <result property="standardNo" column="standard_no"/>
+        <result property="standardNa" column="standard_na"/>
+        <result property="promotionMode" column="promotion_mode"/>
+        <result property="consum" column="consum"/>
+        <result property="present" column="present"/>
+        <result property="predictProfitRate" column="predict_profit_rate"/>
+        <result property="accountingRate" column="accounting_rate"/>
+        <result property="pourDiscount" column="pour_discount"/>
+        <result property="takePart" column="take_part"/>
+        <result property="buyBase" column="buy_base"/>
+        <result property="useQuota" column="use_quota"/>
+        <result property="storeId" column="store_id"/>
+        <result property="usetg" column="usetg"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PromotionStandardMap">
+        select
+          standard_no, standard_na, promotion_mode, consum, present, predict_profit_rate, accounting_rate, pour_discount, take_part, buy_base, use_quota, store_id, usetg
+        from promotion_standard
+        where 
+            standard_no = #{standardNo} 
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="PromotionStandardMap">
+        select
+          standard_no, standard_na, promotion_mode, consum, present, predict_profit_rate, accounting_rate, pour_discount, take_part, buy_base, use_quota, store_id, usetg
+        from promotion_standard
+        limit #{startPosition}, #{maxResult}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="PromotionStandardMap">
+        select
+        standard_no, standard_na, promotion_mode, consum, present, predict_profit_rate, accounting_rate, pour_discount,
+        take_part, buy_base, use_quota, store_id, usetg
+        from promotion_standard
+        <where>
+            <if test="standardNo != null and standardNo != ''">
+                and standard_no = #{standardNo}
+            </if>
+            <if test="standardNa != null and standardNa != ''">
+                and standard_na = #{standardNa}
+            </if>
+            <if test="promotionMode != null and promotionMode != ''">
+                and promotion_mode = #{promotionMode}
+            </if>
+            <if test="consum != null">
+                and consum = #{consum}
+            </if>
+            <if test="present != null">
+                and present = #{present}
+            </if>
+            <if test="predictProfitRate != null">
+                and predict_profit_rate = #{predictProfitRate}
+            </if>
+            <if test="accountingRate != null">
+                and accounting_rate = #{accountingRate}
+            </if>
+            <if test="pourDiscount != null">
+                and pour_discount = #{pourDiscount}
+            </if>
+            <if test="takePart != null and takePart != ''">
+                and take_part = #{takePart}
+            </if>
+            <if test="buyBase != null">
+                and buy_base = #{buyBase}
+            </if>
+            <if test="useQuota != null">
+                and use_quota = #{useQuota}
+            </if>
+            <if test="storeId != null and storeId != ''">
+                and store_id = #{storeId}
+            </if>
+            <if test="usetg != null and usetg != ''">
+                and usetg = #{usetg}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into promotion_standard(standard_na, promotion_mode, consum, present, predict_profit_rate, accounting_rate, pour_discount, take_part, buy_base, use_quota, store_id, usetg)
+        values (#{standardNa}, #{promotionMode}, #{consum}, #{present}, #{predictProfitRate}, #{accountingRate}, #{pourDiscount}, #{takePart}, #{buyBase}, #{useQuota}, #{storeId}, #{usetg})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update promotion_standard
+        <set>
+            <if test="standardNa != null and standardNa != ''">
+                standard_na = #{standardNa},
+            </if>
+            <if test="promotionMode != null and promotionMode != ''">
+                promotion_mode = #{promotionMode},
+            </if>
+            <if test="consum != null">
+                consum = #{consum},
+            </if>
+            <if test="present != null">
+                present = #{present},
+            </if>
+            <if test="predictProfitRate != null">
+                predict_profit_rate = #{predictProfitRate},
+            </if>
+            <if test="accountingRate != null">
+                accounting_rate = #{accountingRate},
+            </if>
+            <if test="pourDiscount != null">
+                pour_discount = #{pourDiscount},
+            </if>
+            <if test="takePart != null and takePart != ''">
+                take_part = #{takePart},
+            </if>
+            <if test="buyBase != null">
+                buy_base = #{buyBase},
+            </if>
+            <if test="useQuota != null">
+                use_quota = #{useQuota},
+            </if>
+            <if test="storeId != null and storeId != ''">
+                store_id = #{storeId},
+            </if>
+            <if test="usetg != null and usetg != ''">
+                usetg = #{usetg},
+            </if>
+        </set>
+        where
+        standard_no = #{standardNo}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from promotion_standard
+        where 
+            standard_no = #{standardNo} 
+    </delete>
+</mapper>

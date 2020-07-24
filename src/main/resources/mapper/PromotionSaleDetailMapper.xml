@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sangto.retail.app.dao.PromotionSaleDetailDao">
+
+    <resultMap type="com.sangto.retail.app.domain.PromotionSaleDetail" id="PromotionSaleDetailMap">
+        <result property="storeId" column="store_id"/>
+        <result property="workDay" column="work_day_"/>
+        <result property="saleDay" column="sale_day_"/>
+        <result property="tradeNo" column="trade_no_"/>
+        <result property="seqNo" column="seq_no_"/>
+        <result property="metchType" column="metch_type_"/>
+        <result property="contractNo" column="contract_no_"/>
+        <result property="saleCodeType" column="sale_code_type_"/>
+        <result property="rangeNo" column="range_no"/>
+        <result property="saleCode" column="sale_code_"/>
+        <result property="num" column="num_"/>
+        <result property="saleMoney" column="sale_money_"/>
+        <result property="batchno" column="batchno"/>
+        <result property="promotionMode" column="promotion_mode"/>
+        <result property="standardNo" column="standard_no"/>
+        <result property="giftAmtShare" column="gift_amt_share"/>
+        <result property="giftDiscShare" column="gift_disc_share"/>
+        <result property="consum" column="consum"/>
+        <result property="present" column="present"/>
+        <result property="accountingRate" column="accounting_rate"/>
+        <result property="pourDiscount" column="pour_discount"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PromotionSaleDetailMap">
+        select
+          store_id, work_day_, sale_day_, trade_no_, seq_no_, metch_type_, contract_no_, sale_code_type_, range_no, sale_code_, num_, sale_money_, batchno, promotion_mode, standard_no, gift_amt_share, gift_disc_share, consum, present, accounting_rate, pour_discount
+        from promotion_sale_detail
+        where 
+            store_id = #{storeId}  AND
+            work_day_ = #{workDay}  AND
+            sale_day_ = #{saleDay}  AND
+            trade_no_ = #{tradeNo}  AND
+            seq_no_ = #{seqNo} 
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="PromotionSaleDetailMap">
+        select
+          store_id, work_day_, sale_day_, trade_no_, seq_no_, metch_type_, contract_no_, sale_code_type_, range_no, sale_code_, num_, sale_money_, batchno, promotion_mode, standard_no, gift_amt_share, gift_disc_share, consum, present, accounting_rate, pour_discount
+        from promotion_sale_detail
+        limit #{startPosition}, #{maxResult}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="PromotionSaleDetailMap">
+        select
+        store_id, work_day_, sale_day_, trade_no_, seq_no_, metch_type_, contract_no_, sale_code_type_, range_no,
+        sale_code_, num_, sale_money_, batchno, promotion_mode, standard_no, gift_amt_share, gift_disc_share, consum,
+        present, accounting_rate, pour_discount
+        from promotion_sale_detail
+        <where>
+            <if test="storeId != null and storeId != ''">
+                and store_id = #{storeId}
+            </if>
+            <if test="workDay != null and workDay != ''">
+                and work_day_ = #{workDay}
+            </if>
+            <if test="saleDay != null and saleDay != ''">
+                and sale_day_ = #{saleDay}
+            </if>
+            <if test="tradeNo != null and tradeNo != ''">
+                and trade_no_ = #{tradeNo}
+            </if>
+            <if test="seqNo != null">
+                and seq_no_ = #{seqNo}
+            </if>
+            <if test="metchType != null and metchType != ''">
+                and metch_type_ = #{metchType}
+            </if>
+            <if test="contractNo != null and contractNo != ''">
+                and contract_no_ = #{contractNo}
+            </if>
+            <if test="saleCodeType != null and saleCodeType != ''">
+                and sale_code_type_ = #{saleCodeType}
+            </if>
+            <if test="rangeNo != null and rangeNo != ''">
+                and range_no = #{rangeNo}
+            </if>
+            <if test="saleCode != null and saleCode != ''">
+                and sale_code_ = #{saleCode}
+            </if>
+            <if test="num != null">
+                and num_ = #{num}
+            </if>
+            <if test="saleMoney != null">
+                and sale_money_ = #{saleMoney}
+            </if>
+            <if test="batchno != null and batchno != ''">
+                and batchno = #{batchno}
+            </if>
+            <if test="promotionMode != null and promotionMode != ''">
+                and promotion_mode = #{promotionMode}
+            </if>
+            <if test="standardNo != null and standardNo != ''">
+                and standard_no = #{standardNo}
+            </if>
+            <if test="giftAmtShare != null">
+                and gift_amt_share = #{giftAmtShare}
+            </if>
+            <if test="giftDiscShare != null">
+                and gift_disc_share = #{giftDiscShare}
+            </if>
+            <if test="consum != null">
+                and consum = #{consum}
+            </if>
+            <if test="present != null">
+                and present = #{present}
+            </if>
+            <if test="accountingRate != null">
+                and accounting_rate = #{accountingRate}
+            </if>
+            <if test="pourDiscount != null">
+                and pour_discount = #{pourDiscount}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into promotion_sale_detail(metch_type_, contract_no_, sale_code_type_, range_no, sale_code_, num_, sale_money_, batchno, promotion_mode, standard_no, gift_amt_share, gift_disc_share, consum, present, accounting_rate, pour_discount)
+        values (#{metchType}, #{contractNo}, #{saleCodeType}, #{rangeNo}, #{saleCode}, #{num}, #{saleMoney}, #{batchno}, #{promotionMode}, #{standardNo}, #{giftAmtShare}, #{giftDiscShare}, #{consum}, #{present}, #{accountingRate}, #{pourDiscount})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update promotion_sale_detail
+        <set>
+            <if test="metchType != null and metchType != ''">
+                metch_type_ = #{metchType},
+            </if>
+            <if test="contractNo != null and contractNo != ''">
+                contract_no_ = #{contractNo},
+            </if>
+            <if test="saleCodeType != null and saleCodeType != ''">
+                sale_code_type_ = #{saleCodeType},
+            </if>
+            <if test="rangeNo != null and rangeNo != ''">
+                range_no = #{rangeNo},
+            </if>
+            <if test="saleCode != null and saleCode != ''">
+                sale_code_ = #{saleCode},
+            </if>
+            <if test="num != null">
+                num_ = #{num},
+            </if>
+            <if test="saleMoney != null">
+                sale_money_ = #{saleMoney},
+            </if>
+            <if test="batchno != null and batchno != ''">
+                batchno = #{batchno},
+            </if>
+            <if test="promotionMode != null and promotionMode != ''">
+                promotion_mode = #{promotionMode},
+            </if>
+            <if test="standardNo != null and standardNo != ''">
+                standard_no = #{standardNo},
+            </if>
+            <if test="giftAmtShare != null">
+                gift_amt_share = #{giftAmtShare},
+            </if>
+            <if test="giftDiscShare != null">
+                gift_disc_share = #{giftDiscShare},
+            </if>
+            <if test="consum != null">
+                consum = #{consum},
+            </if>
+            <if test="present != null">
+                present = #{present},
+            </if>
+            <if test="accountingRate != null">
+                accounting_rate = #{accountingRate},
+            </if>
+            <if test="pourDiscount != null">
+                pour_discount = #{pourDiscount},
+            </if>
+        </set>
+        where
+        store_id = #{storeId} AND
+        work_day_ = #{workDay} AND
+        sale_day_ = #{saleDay} AND
+        trade_no_ = #{tradeNo} AND
+        seq_no_ = #{seqNo}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from promotion_sale_detail
+        where 
+            store_id = #{storeId}  AND
+            work_day_ = #{workDay}  AND
+            sale_day_ = #{saleDay}  AND
+            trade_no_ = #{tradeNo}  AND
+            seq_no_ = #{seqNo} 
+    </delete>
+</mapper>

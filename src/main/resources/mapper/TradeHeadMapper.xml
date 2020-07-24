@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sangto.retail.app.dao.TradeHeadDao">
+
+    <resultMap type="com.sangto.retail.app.domain.TradeHead" id="TradeHeadMap">
+        <result property="shopNo" column="shop_no_"/>
+        <result property="workDay" column="work_day_"/>
+        <result property="tradeNo" column="trade_no_"/>
+        <result property="posNo" column="pos_no_"/>
+        <result property="shiftNo" column="shift_no_"/>
+        <result property="posMode" column="pos_mode_"/>
+        <result property="casherNo" column="casher_no_"/>
+        <result property="contractNo" column="contract_no_"/>
+        <result property="cardReqType" column="card_req_type_"/>
+        <result property="cardNo" column="card_no_"/>
+        <result property="cardAccount" column="card_account_"/>
+        <result property="cardType" column="card_type_"/>
+        <result property="tradeType" column="trade_type_"/>
+        <result property="tradeMoney" column="trade_money_"/>
+        <result property="decreaseMoney" column="decrease_money_"/>
+        <result property="discGiftMoney" column="disc_gift_money_"/>
+        <result property="discGiftNo" column="disc_gift_no_"/>
+        <result property="discMoney" column="disc_money_"/>
+        <result property="shouldPayMoney" column="should_pay_money_"/>
+        <result property="payNum" column="pay_num_"/>
+        <result property="payMoney" column="pay_money_"/>
+        <result property="stat" column="stat_"/>
+        <result property="tradeDate" column="trade_date_"/>
+        <result property="accountTag" column="account_tag_"/>
+        <result property="accountDate" column="account_date_"/>
+        <result property="cancelTag" column="cancel_tag_"/>
+        <result property="cancelDate" column="cancel_date_"/>
+        <result property="orgWorkDay" column="org_work_day_"/>
+        <result property="orgTradeNo" column="org_trade_no_"/>
+        <result property="orgTradeMoney" column="org_trade_money_"/>
+        <result property="refundMoney" column="refund_money_"/>
+        <result property="tradeSaleDate" column="trade_sale_date_"/>
+        <result property="tradeSaleTag" column="trade_sale_tag_"/>
+        <result property="promotionBacthNo" column="promotion_bacth_no_"/>
+        <result property="localNo" column="local_no_"/>
+        <result property="otherTradeNo" column="other_trade_no_"/>
+        <result property="note" column="note_"/>
+        <result property="dataFlag" column="data_flag"/>
+        <result property="freight" column="freight"/>
+        <result property="crmTag" column="crm_tag"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TradeHeadMap">
+        select
+          shop_no_, work_day_, trade_no_, pos_no_, shift_no_, pos_mode_, casher_no_, contract_no_, card_req_type_, card_no_, card_account_, card_type_, trade_type_, trade_money_, decrease_money_, disc_gift_money_, disc_gift_no_, disc_money_, should_pay_money_, pay_num_, pay_money_, stat_, trade_date_, account_tag_, account_date_, cancel_tag_, cancel_date_, org_work_day_, org_trade_no_, org_trade_money_, refund_money_, trade_sale_date_, trade_sale_tag_, promotion_bacth_no_, local_no_, other_trade_no_, note_, data_flag, freight, crm_tag
+        from trade_head
+        where 
+            shop_no_ = #{shopNo}  AND
+            work_day_ = #{workDay}  AND
+            trade_no_ = #{tradeNo} 
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TradeHeadMap">
+        select
+          shop_no_, work_day_, trade_no_, pos_no_, shift_no_, pos_mode_, casher_no_, contract_no_, card_req_type_, card_no_, card_account_, card_type_, trade_type_, trade_money_, decrease_money_, disc_gift_money_, disc_gift_no_, disc_money_, should_pay_money_, pay_num_, pay_money_, stat_, trade_date_, account_tag_, account_date_, cancel_tag_, cancel_date_, org_work_day_, org_trade_no_, org_trade_money_, refund_money_, trade_sale_date_, trade_sale_tag_, promotion_bacth_no_, local_no_, other_trade_no_, note_, data_flag, freight, crm_tag
+        from trade_head
+        limit #{startPosition}, #{maxResult}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="TradeHeadMap">
+        select
+        shop_no_, work_day_, trade_no_, pos_no_, shift_no_, pos_mode_, casher_no_, contract_no_, card_req_type_,
+        card_no_, card_account_, card_type_, trade_type_, trade_money_, decrease_money_, disc_gift_money_,
+        disc_gift_no_, disc_money_, should_pay_money_, pay_num_, pay_money_, stat_, trade_date_, account_tag_,
+        account_date_, cancel_tag_, cancel_date_, org_work_day_, org_trade_no_, org_trade_money_, refund_money_,
+        trade_sale_date_, trade_sale_tag_, promotion_bacth_no_, local_no_, other_trade_no_, note_, data_flag, freight,
+        crm_tag
+        from trade_head
+        <where>
+            <if test="shopNo != null and shopNo != ''">
+                and shop_no_ = #{shopNo}
+            </if>
+            <if test="workDay != null and workDay != ''">
+                and work_day_ = #{workDay}
+            </if>
+            <if test="tradeNo != null and tradeNo != ''">
+                and trade_no_ = #{tradeNo}
+            </if>
+            <if test="posNo != null and posNo != ''">
+                and pos_no_ = #{posNo}
+            </if>
+            <if test="shiftNo != null">
+                and shift_no_ = #{shiftNo}
+            </if>
+            <if test="posMode != null and posMode != ''">
+                and pos_mode_ = #{posMode}
+            </if>
+            <if test="casherNo != null and casherNo != ''">
+                and casher_no_ = #{casherNo}
+            </if>
+            <if test="contractNo != null and contractNo != ''">
+                and contract_no_ = #{contractNo}
+            </if>
+            <if test="cardReqType != null and cardReqType != ''">
+                and card_req_type_ = #{cardReqType}
+            </if>
+            <if test="cardNo != null and cardNo != ''">
+                and card_no_ = #{cardNo}
+            </if>
+            <if test="cardAccount != null and cardAccount != ''">
+                and card_account_ = #{cardAccount}
+            </if>
+            <if test="cardType != null and cardType != ''">
+                and card_type_ = #{cardType}
+            </if>
+            <if test="tradeType != null and tradeType != ''">
+                and trade_type_ = #{tradeType}
+            </if>
+            <if test="tradeMoney != null">
+                and trade_money_ = #{tradeMoney}
+            </if>
+            <if test="decreaseMoney != null">
+                and decrease_money_ = #{decreaseMoney}
+            </if>
+            <if test="discGiftMoney != null">
+                and disc_gift_money_ = #{discGiftMoney}
+            </if>
+            <if test="discGiftNo != null and discGiftNo != ''">
+                and disc_gift_no_ = #{discGiftNo}
+            </if>
+            <if test="discMoney != null">
+                and disc_money_ = #{discMoney}
+            </if>
+            <if test="shouldPayMoney != null">
+                and should_pay_money_ = #{shouldPayMoney}
+            </if>
+            <if test="payNum != null">
+                and pay_num_ = #{payNum}
+            </if>
+            <if test="payMoney != null">
+                and pay_money_ = #{payMoney}
+            </if>
+            <if test="stat != null and stat != ''">
+                and stat_ = #{stat}
+            </if>
+            <if test="tradeDate != null and tradeDate != ''">
+                and trade_date_ = #{tradeDate}
+            </if>
+            <if test="accountTag != null and accountTag != ''">
+                and account_tag_ = #{accountTag}
+            </if>
+            <if test="accountDate != null and accountDate != ''">
+                and account_date_ = #{accountDate}
+            </if>
+            <if test="cancelTag != null and cancelTag != ''">
+                and cancel_tag_ = #{cancelTag}
+            </if>
+            <if test="cancelDate != null and cancelDate != ''">
+                and cancel_date_ = #{cancelDate}
+            </if>
+            <if test="orgWorkDay != null and orgWorkDay != ''">
+                and org_work_day_ = #{orgWorkDay}
+            </if>
+            <if test="orgTradeNo != null and orgTradeNo != ''">
+                and org_trade_no_ = #{orgTradeNo}
+            </if>
+            <if test="orgTradeMoney != null">
+                and org_trade_money_ = #{orgTradeMoney}
+            </if>
+            <if test="refundMoney != null">
+                and refund_money_ = #{refundMoney}
+            </if>
+            <if test="tradeSaleDate != null and tradeSaleDate != ''">
+                and trade_sale_date_ = #{tradeSaleDate}
+            </if>
+            <if test="tradeSaleTag != null and tradeSaleTag != ''">
+                and trade_sale_tag_ = #{tradeSaleTag}
+            </if>
+            <if test="promotionBacthNo != null and promotionBacthNo != ''">
+                and promotion_bacth_no_ = #{promotionBacthNo}
+            </if>
+            <if test="localNo != null and localNo != ''">
+                and local_no_ = #{localNo}
+            </if>
+            <if test="otherTradeNo != null and otherTradeNo != ''">
+                and other_trade_no_ = #{otherTradeNo}
+            </if>
+            <if test="note != null and note != ''">
+                and note_ = #{note}
+            </if>
+            <if test="dataFlag != null and dataFlag != ''">
+                and data_flag = #{dataFlag}
+            </if>
+            <if test="freight != null">
+                and freight = #{freight}
+            </if>
+            <if test="crmTag != null and crmTag != ''">
+                and crm_tag = #{crmTag}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into trade_head(pos_no_, shift_no_, pos_mode_, casher_no_, contract_no_, card_req_type_, card_no_, card_account_, card_type_, trade_type_, trade_money_, decrease_money_, disc_gift_money_, disc_gift_no_, disc_money_, should_pay_money_, pay_num_, pay_money_, stat_, trade_date_, account_tag_, account_date_, cancel_tag_, cancel_date_, org_work_day_, org_trade_no_, org_trade_money_, refund_money_, trade_sale_date_, trade_sale_tag_, promotion_bacth_no_, local_no_, other_trade_no_, note_, data_flag, freight, crm_tag)
+        values (#{posNo}, #{shiftNo}, #{posMode}, #{casherNo}, #{contractNo}, #{cardReqType}, #{cardNo}, #{cardAccount}, #{cardType}, #{tradeType}, #{tradeMoney}, #{decreaseMoney}, #{discGiftMoney}, #{discGiftNo}, #{discMoney}, #{shouldPayMoney}, #{payNum}, #{payMoney}, #{stat}, #{tradeDate}, #{accountTag}, #{accountDate}, #{cancelTag}, #{cancelDate}, #{orgWorkDay}, #{orgTradeNo}, #{orgTradeMoney}, #{refundMoney}, #{tradeSaleDate}, #{tradeSaleTag}, #{promotionBacthNo}, #{localNo}, #{otherTradeNo}, #{note}, #{dataFlag}, #{freight}, #{crmTag})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update trade_head
+        <set>
+            <if test="posNo != null and posNo != ''">
+                pos_no_ = #{posNo},
+            </if>
+            <if test="shiftNo != null">
+                shift_no_ = #{shiftNo},
+            </if>
+            <if test="posMode != null and posMode != ''">
+                pos_mode_ = #{posMode},
+            </if>
+            <if test="casherNo != null and casherNo != ''">
+                casher_no_ = #{casherNo},
+            </if>
+            <if test="contractNo != null and contractNo != ''">
+                contract_no_ = #{contractNo},
+            </if>
+            <if test="cardReqType != null and cardReqType != ''">
+                card_req_type_ = #{cardReqType},
+            </if>
+            <if test="cardNo != null and cardNo != ''">
+                card_no_ = #{cardNo},
+            </if>
+            <if test="cardAccount != null and cardAccount != ''">
+                card_account_ = #{cardAccount},
+            </if>
+            <if test="cardType != null and cardType != ''">
+                card_type_ = #{cardType},
+            </if>
+            <if test="tradeType != null and tradeType != ''">
+                trade_type_ = #{tradeType},
+            </if>
+            <if test="tradeMoney != null">
+                trade_money_ = #{tradeMoney},
+            </if>
+            <if test="decreaseMoney != null">
+                decrease_money_ = #{decreaseMoney},
+            </if>
+            <if test="discGiftMoney != null">
+                disc_gift_money_ = #{discGiftMoney},
+            </if>
+            <if test="discGiftNo != null and discGiftNo != ''">
+                disc_gift_no_ = #{discGiftNo},
+            </if>
+            <if test="discMoney != null">
+                disc_money_ = #{discMoney},
+            </if>
+            <if test="shouldPayMoney != null">
+                should_pay_money_ = #{shouldPayMoney},
+            </if>
+            <if test="payNum != null">
+                pay_num_ = #{payNum},
+            </if>
+            <if test="payMoney != null">
+                pay_money_ = #{payMoney},
+            </if>
+            <if test="stat != null and stat != ''">
+                stat_ = #{stat},
+            </if>
+            <if test="tradeDate != null and tradeDate != ''">
+                trade_date_ = #{tradeDate},
+            </if>
+            <if test="accountTag != null and accountTag != ''">
+                account_tag_ = #{accountTag},
+            </if>
+            <if test="accountDate != null and accountDate != ''">
+                account_date_ = #{accountDate},
+            </if>
+            <if test="cancelTag != null and cancelTag != ''">
+                cancel_tag_ = #{cancelTag},
+            </if>
+            <if test="cancelDate != null and cancelDate != ''">
+                cancel_date_ = #{cancelDate},
+            </if>
+            <if test="orgWorkDay != null and orgWorkDay != ''">
+                org_work_day_ = #{orgWorkDay},
+            </if>
+            <if test="orgTradeNo != null and orgTradeNo != ''">
+                org_trade_no_ = #{orgTradeNo},
+            </if>
+            <if test="orgTradeMoney != null">
+                org_trade_money_ = #{orgTradeMoney},
+            </if>
+            <if test="refundMoney != null">
+                refund_money_ = #{refundMoney},
+            </if>
+            <if test="tradeSaleDate != null and tradeSaleDate != ''">
+                trade_sale_date_ = #{tradeSaleDate},
+            </if>
+            <if test="tradeSaleTag != null and tradeSaleTag != ''">
+                trade_sale_tag_ = #{tradeSaleTag},
+            </if>
+            <if test="promotionBacthNo != null and promotionBacthNo != ''">
+                promotion_bacth_no_ = #{promotionBacthNo},
+            </if>
+            <if test="localNo != null and localNo != ''">
+                local_no_ = #{localNo},
+            </if>
+            <if test="otherTradeNo != null and otherTradeNo != ''">
+                other_trade_no_ = #{otherTradeNo},
+            </if>
+            <if test="note != null and note != ''">
+                note_ = #{note},
+            </if>
+            <if test="dataFlag != null and dataFlag != ''">
+                data_flag = #{dataFlag},
+            </if>
+            <if test="freight != null">
+                freight = #{freight},
+            </if>
+            <if test="crmTag != null and crmTag != ''">
+                crm_tag = #{crmTag},
+            </if>
+        </set>
+        where
+        shop_no_ = #{shopNo} AND
+        work_day_ = #{workDay} AND
+        trade_no_ = #{tradeNo}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from trade_head
+        where 
+            shop_no_ = #{shopNo}  AND
+            work_day_ = #{workDay}  AND
+            trade_no_ = #{tradeNo} 
+    </delete>
+</mapper>

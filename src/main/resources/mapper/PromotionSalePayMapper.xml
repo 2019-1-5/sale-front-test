@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sangto.retail.app.dao.PromotionSalePayDao">
+
+    <resultMap type="com.sangto.retail.app.domain.PromotionSalePay" id="PromotionSalePayMap">
+        <result property="storeId" column="store_id"/>
+        <result property="workDay" column="work_day_"/>
+        <result property="saleDay" column="sale_day_"/>
+        <result property="tradeNo" column="trade_no_"/>
+        <result property="seqNo" column="seq_no_"/>
+        <result property="tradeType" column="trade_type_"/>
+        <result property="account" column="account"/>
+        <result property="batchno" column="batchno"/>
+        <result property="rangeNo" column="range_no"/>
+        <result property="consMny" column="cons_mny"/>
+        <result property="tradeTime" column="trade_time"/>
+        <result property="voidTag" column="void_tag_"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PromotionSalePayMap">
+        select
+          store_id, work_day_, sale_day_, trade_no_, seq_no_, trade_type_, account, batchno, range_no, cons_mny, trade_time, void_tag_
+        from promotion_sale_pay
+        where 
+            store_id = #{storeId}  AND
+            work_day_ = #{workDay}  AND
+            sale_day_ = #{saleDay}  AND
+            trade_no_ = #{tradeNo}  AND
+            seq_no_ = #{seqNo} 
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="PromotionSalePayMap">
+        select
+          store_id, work_day_, sale_day_, trade_no_, seq_no_, trade_type_, account, batchno, range_no, cons_mny, trade_time, void_tag_
+        from promotion_sale_pay
+        limit #{startPosition}, #{maxResult}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="PromotionSalePayMap">
+        select
+        store_id, work_day_, sale_day_, trade_no_, seq_no_, trade_type_, account, batchno, range_no, cons_mny,
+        trade_time, void_tag_
+        from promotion_sale_pay
+        <where>
+            <if test="storeId != null and storeId != ''">
+                and store_id = #{storeId}
+            </if>
+            <if test="workDay != null and workDay != ''">
+                and work_day_ = #{workDay}
+            </if>
+            <if test="saleDay != null and saleDay != ''">
+                and sale_day_ = #{saleDay}
+            </if>
+            <if test="tradeNo != null and tradeNo != ''">
+                and trade_no_ = #{tradeNo}
+            </if>
+            <if test="seqNo != null">
+                and seq_no_ = #{seqNo}
+            </if>
+            <if test="tradeType != null and tradeType != ''">
+                and trade_type_ = #{tradeType}
+            </if>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
+            <if test="batchno != null and batchno != ''">
+                and batchno = #{batchno}
+            </if>
+            <if test="rangeNo != null and rangeNo != ''">
+                and range_no = #{rangeNo}
+            </if>
+            <if test="consMny != null">
+                and cons_mny = #{consMny}
+            </if>
+            <if test="tradeTime != null and tradeTime != ''">
+                and trade_time = #{tradeTime}
+            </if>
+            <if test="voidTag != null and voidTag != ''">
+                and void_tag_ = #{voidTag}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into promotion_sale_pay(trade_type_, account, batchno, range_no, cons_mny, trade_time, void_tag_)
+        values (#{tradeType}, #{account}, #{batchno}, #{rangeNo}, #{consMny}, #{tradeTime}, #{voidTag})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update promotion_sale_pay
+        <set>
+            <if test="tradeType != null and tradeType != ''">
+                trade_type_ = #{tradeType},
+            </if>
+            <if test="account != null and account != ''">
+                account = #{account},
+            </if>
+            <if test="batchno != null and batchno != ''">
+                batchno = #{batchno},
+            </if>
+            <if test="rangeNo != null and rangeNo != ''">
+                range_no = #{rangeNo},
+            </if>
+            <if test="consMny != null">
+                cons_mny = #{consMny},
+            </if>
+            <if test="tradeTime != null and tradeTime != ''">
+                trade_time = #{tradeTime},
+            </if>
+            <if test="voidTag != null and voidTag != ''">
+                void_tag_ = #{voidTag},
+            </if>
+        </set>
+        where
+        store_id = #{storeId} AND
+        work_day_ = #{workDay} AND
+        sale_day_ = #{saleDay} AND
+        trade_no_ = #{tradeNo} AND
+        seq_no_ = #{seqNo}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from promotion_sale_pay
+        where 
+            store_id = #{storeId}  AND
+            work_day_ = #{workDay}  AND
+            sale_day_ = #{saleDay}  AND
+            trade_no_ = #{tradeNo}  AND
+            seq_no_ = #{seqNo} 
+    </delete>
+</mapper>

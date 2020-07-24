@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sangto.retail.app.dao.RetailGoodClsDao">
+
+    <resultMap type="com.sangto.retail.app.domain.RetailGoodCls" id="RetailGoodClsMap">
+        <result property="clsId" column="cls_id"/>
+        <result property="clsCode" column="cls_code"/>
+        <result property="clsName" column="cls_name"/>
+        <result property="highCode" column="high_code"/>
+        <result property="lastFlag" column="last_flag"/>
+        <result property="vipCoefficient" column="vip_coefficient"/>
+        <result property="firstGradeCode" column="first_grade_code"/>
+        <result property="creopr" column="creopr"/>
+        <result property="credate" column="credate"/>
+        <result property="modopr" column="modopr"/>
+        <result property="moddate" column="moddate"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="RetailGoodClsMap">
+        select
+          cls_id, cls_code, cls_name, high_code, last_flag, vip_coefficient, first_grade_code, creopr, credate, modopr, moddate
+        from retail_good_cls
+        where 
+            cls_id = #{clsId} 
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="RetailGoodClsMap">
+        select
+          cls_id, cls_code, cls_name, high_code, last_flag, vip_coefficient, first_grade_code, creopr, credate, modopr, moddate
+        from retail_good_cls
+        limit #{startPosition}, #{maxResult}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="RetailGoodClsMap">
+        select
+        cls_id, cls_code, cls_name, high_code, last_flag, vip_coefficient, first_grade_code, creopr, credate, modopr,
+        moddate
+        from retail_good_cls
+        <where>
+            <if test="clsId != null">
+                and cls_id = #{clsId}
+            </if>
+            <if test="clsCode != null and clsCode != ''">
+                and cls_code = #{clsCode}
+            </if>
+            <if test="clsName != null and clsName != ''">
+                and cls_name = #{clsName}
+            </if>
+            <if test="highCode != null and highCode != ''">
+                and high_code = #{highCode}
+            </if>
+            <if test="lastFlag != null and lastFlag != ''">
+                and last_flag = #{lastFlag}
+            </if>
+            <if test="vipCoefficient != null">
+                and vip_coefficient = #{vipCoefficient}
+            </if>
+            <if test="firstGradeCode != null and firstGradeCode != ''">
+                and first_grade_code = #{firstGradeCode}
+            </if>
+            <if test="creopr != null and creopr != ''">
+                and creopr = #{creopr}
+            </if>
+            <if test="credate != null and credate != ''">
+                and credate = #{credate}
+            </if>
+            <if test="modopr != null and modopr != ''">
+                and modopr = #{modopr}
+            </if>
+            <if test="moddate != null and moddate != ''">
+                and moddate = #{moddate}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into retail_good_cls(cls_code, cls_name, high_code, last_flag, vip_coefficient, first_grade_code, creopr, credate, modopr, moddate)
+        values (#{clsCode}, #{clsName}, #{highCode}, #{lastFlag}, #{vipCoefficient}, #{firstGradeCode}, #{creopr}, #{credate}, #{modopr}, #{moddate})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update retail_good_cls
+        <set>
+            <if test="clsCode != null and clsCode != ''">
+                cls_code = #{clsCode},
+            </if>
+            <if test="clsName != null and clsName != ''">
+                cls_name = #{clsName},
+            </if>
+            <if test="highCode != null and highCode != ''">
+                high_code = #{highCode},
+            </if>
+            <if test="lastFlag != null and lastFlag != ''">
+                last_flag = #{lastFlag},
+            </if>
+            <if test="vipCoefficient != null">
+                vip_coefficient = #{vipCoefficient},
+            </if>
+            <if test="firstGradeCode != null and firstGradeCode != ''">
+                first_grade_code = #{firstGradeCode},
+            </if>
+            <if test="creopr != null and creopr != ''">
+                creopr = #{creopr},
+            </if>
+            <if test="credate != null and credate != ''">
+                credate = #{credate},
+            </if>
+            <if test="modopr != null and modopr != ''">
+                modopr = #{modopr},
+            </if>
+            <if test="moddate != null and moddate != ''">
+                moddate = #{moddate},
+            </if>
+        </set>
+        where
+        cls_id = #{clsId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from retail_good_cls
+        where 
+            cls_id = #{clsId} 
+    </delete>
+</mapper>
