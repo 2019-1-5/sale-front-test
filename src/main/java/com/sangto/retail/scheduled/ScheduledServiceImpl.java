@@ -17,7 +17,7 @@ public class ScheduledServiceImpl implements ScheduledService{
     /**
      * 每一分钟执行一次  1000 * 60 * 1
      */
-    @Scheduled(fixedRate=1000 * 16 * 1)
+    @Scheduled(fixedRate=1000 * 17 * 1)
     @Override
     public void execute() {
         logger.info("数据上传到CRM数据库");
