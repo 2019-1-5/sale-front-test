@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 /**
  * (TradeHead)实体类
  *
@@ -17,13 +19,16 @@ public class TradeHead implements Serializable {
 
     private static final long serialVersionUID = -70021610095018842L;
 
-    @ApiModelProperty(value = "     (4)")
+    @ApiModelProperty(value = "分店(4)")
+    @NotBlank(message = "项目不能为空")
     private String shopNo;
 
-    @ApiModelProperty(value = "     (8)")
+    @ApiModelProperty(value = "工作日(8)")
+    @NotBlank(message = "工作日不能为空")
     private String workDay;
 
-    @ApiModelProperty(value = "     (50)")
+    @ApiModelProperty(value = "交易号(50)")
+    @NotBlank(message = "交易号不能为空")
     private String tradeNo;
 
     @ApiModelProperty(value = "     (20)")

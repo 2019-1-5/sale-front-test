@@ -1,6 +1,5 @@
 package com.sangto.retail.app.controller;
 
-import com.sangto.retail.app.domain.PromotionSaleDetail;
 import com.sangto.retail.app.service.PromotionSaleDetailService;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -4,6 +4,8 @@ import com.sangto.retail.app.domain.TradeHead;
 import com.sangto.retail.app.service.TradeHeadService;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,11 +32,11 @@ public class TradeHeadController {
      * 通过主键查询单条数据
      *
      * @return 单条数据
-     * @Param shopNo, workDay, tradeNo 主键
+     * @Param TradeHead
      */
     @GetMapping("selectOne")
-    public TradeHead selectOne(@RequestParam("shopNo") String shopNo, @RequestParam("workDay") String workDay, @RequestParam("tradeNo") String tradeNo) {
-        return tradeHeadService.queryById(shopNo, workDay, tradeNo);
+    public TradeHead selectOne(TradeHead tradeHead) {
+        return tradeHeadService.queryById(tradeHead.getShopNo(), tradeHead.getWorkDay(), tradeHead.getTradeNo());
     }
 
 }

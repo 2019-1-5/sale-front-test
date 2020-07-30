@@ -4,6 +4,7 @@ import com.sangto.retail.app.domain.PromotionSendBalanceDay;
 import com.sangto.retail.app.service.PromotionSendBalanceDayService;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,7 @@ import javax.annotation.Resource;
  * @author bww
  * @since 2020-07-14 11:06:36
  */
-@Api(tags = "2131231")
+@Api(tags = "测试中文是否能点开")
 @RestController
 @RequestMapping("/promotionSendBalanceDay/")
 public class PromotionSendBalanceDayController {
